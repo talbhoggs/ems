@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="/templates/template.xhtml">
+	<ui:param name="pageTitle" value="List Page" />
+	<ui:param name="headerTitle" value="Employees" />
+	<ui:define name="panel-main">
+		<table class="table table-bordered table-sm">
+			<thead>
+				<tr>
+					<th scope="col">First</th>
+					<th scope="col">Last</th>
+					<th scope="col">email</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat var="employee" value="#{employeeListManageBean.employees}">
+					<tr>
+						<td>#{employee.firstName}</td>
+						<td>#{employee.lastName}</td>
+						<td>#{employee.email}</td>
+						<td>
+							<h:outputLink value="employee-details.xhtml">
+								details <f:param name="id" value="#{employee.id}" />
+							</h:outputLink> | 
+							<h:outputLink value="employee-update.xhtml">
+								edit <f:param name="id" value="#{employee.id}" />
+							</h:outputLink>
+						</td>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+		<h:button value="Add Employee" styleClass="btn btn-primary" outcome="employee-create"/>
+	</ui:define>
+</ui:composition>
+</html>

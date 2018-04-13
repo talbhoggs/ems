@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="/templates/template.xhtml">
+	<ui:param name="pageTitle" value="Details Page" />
+	<ui:param name="headerTitle" value="Employee Details" />
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{employeeDetailsManageBean.id}" />
+		<!-- need to have getters and setters in the ManageBean -->
+		<f:viewAction action="#{employeeDetailsManageBean.onLoad}" />
+	</f:metadata>
+
+	<ui:define name="panel-main">
+
+		<div class="my-3 p-3 bg-white rounded box-shadow">
+			<h6 class="border-bottom border-gray pb-2 mb-0">#{employeeDetailsManageBean.employee.firstName}
+				#{employeeDetailsManageBean.employee.lastName}</h6>
+			<div class="media text-muted pt-3">
+				<p class="media-body pb-3 mb-0 small lh-125">
+					<strong class="d-block text-gray-dark">#{employeeDetailsManageBean.employee.email}</strong>
+					<h:outputLink value="employee-list.xhtml">Back to Employee List</h:outputLink>
+				</p>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>

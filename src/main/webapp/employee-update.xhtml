@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="/templates/template.xhtml">
+	<ui:param name="pageTitle" value="Update Page" />
+	<ui:param name="headerTitle" value="Update Employee" />
+	<ui:define name="panel-main">
+
+
+		<f:metadata>
+			<f:viewParam name="id" value="#{employeeUpdateManageBean.id}" />
+			<!-- need to have getters and setters in the ManageBean -->
+			<f:viewAction action="#{employeeUpdateManageBean.onLoad}" />
+		</f:metadata>
+		
+		<!-- 
+			NOTES:
+		
+		
+			JSF facelets does not fully support html5 tags by default. For example, JSF facelets don't have an placeholder attribute by default.
+			
+			placeholder="Last Name"
+			
+			*HTML5 
+			
+			<input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Last Name" />
+			
+			*JSF - 
+			<h:inputText styleClass="form-control" id="lastName" +++placeholder="Last Name"++++></h:inputText>
+			
+			Solution : 
+			
+			To do this once solution is to import the passthrough tag library and add a custom attribute
+			
+			#1 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+			
+			#2 p:placeholder="First Name"
+			
+			
+			Final 
+			<h:inputText styleClass="form-control" id="firstName" p:placeholder="First Name"></h:inputText>
+			
+			
+		 -->
+		 <style>
+		 	.error {
+		 		color : red;
+		 	}
+		 </style>
+
+		<h:form>
+			<div class="form-group">
+				<h:inputText styleClass="form-control" id="firstName"
+					p:placeholder="First Name" value="#{employeeUpdateManageBean.employee.firstName}" required="true" requiredMessage="Please enter your First Name." ></h:inputText>
+				<h:message styleClass="error" for="firstName"></h:message>
+			</div>
+			<div class="form-group">
+				<h:inputText styleClass="form-control" id="lastName"
+					p:placeholder="Last Name" value="#{employeeUpdateManageBean.employee.lastName}"  required="true" requiredMessage="Please enter your Last Name."></h:inputText>
+				<h:message styleClass="error" for="lastName"></h:message>
+			</div>
+			<div class="form-group">
+				<h:inputText styleClass="form-control" id="emailAddress"
+					p:placeholder="Email Address" value="#{employeeUpdateManageBean.employee.email}"  required="true" requiredMessage="Please enter your Email address."></h:inputText>
+				<h:message styleClass="error" for="emailAddress"></h:message>
+			</div>
+			
+			
+			<div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+			  <div class="input-group mr-2">
+				<h:commandButton value="Update" styleClass="btn btn-primary" action="#{employeeUpdateManageBean.update}"/>
+			  </div>
+			  <div class="input-group mr-2">
+				 <h:commandButton value="Delete" styleClass="btn btn-primary" action="#{employeeUpdateManageBean.delete}"/>
+			  </div>
+			  <div class="input-group">
+				<h:outputLink value="employee-list.xhtml" styleClass="btn btn-primary">Back to Employee List</h:outputLink>
+			  </div>
+			</div>
+			
+			
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
